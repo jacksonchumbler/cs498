@@ -6,14 +6,14 @@ form_df = pd.read_csv('forms.csv')
 current_user = "invalid_user"
 
 def main():
-    
+
     login()
     menu()
 
     print(user_df)
     print(form_df)
-    user_df.to_csv('users.csv', index = False) 
-    form_df.to_csv('forms.csv', index = False) 
+    user_df.to_csv('users.csv', index = False)
+    form_df.to_csv('forms.csv', index = False)
 
 def menu():
     global current_user
@@ -33,8 +33,8 @@ def menu():
         elif choice == 2:
             # Securely clears login
             current_user = ""
-            break 
-        else: 
+            break
+        else:
             print("Invalid Input!")
 
 def form():
@@ -79,8 +79,8 @@ def generate_user():
     name = input('Enter your name: ')
     email = input('Enter your email: ')
     passwd  = input('Enter your password: ')
-    user_df.loc[len(user_df)] = [name, email, passwd] 
-    return 
+    user_df.loc[len(user_df)] = [name, email, passwd]
+    return
 
 if __name__ == '__main__':
     main()
