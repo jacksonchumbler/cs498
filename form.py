@@ -1,6 +1,5 @@
 import pandas as pd
 import sys
-from openpyxl import *
 from tkinter import *
 
 
@@ -19,6 +18,7 @@ def main():
     user_df.to_csv('users.csv', index = False)
     form_df.to_csv('forms.csv', index = False)
 
+	
 def menu():
     global current_user
     while True:
@@ -31,7 +31,6 @@ def menu():
         choice = int(input('Enter a choice: '))
         print()
         if   choice == 0:
-            # form()
             gui_form()
         elif choice == 1:
             view()
@@ -42,24 +41,18 @@ def menu():
         else:
             print("Invalid Input!")
 
-def form():
-    print("Please provide the following information...")
-    name_d = input("Name of Deceased: ")
-    place_d = input("Address of Death: ")
-    time_d = input("Death Time: ")
-    form_df.loc[len(form_df)] = [current_user, name_d, place_d, time_d]
-    print()
-
+	
 def view():
     # print("Under Construction!")
     # print(form_df.loc[form_df['author'] == current_user])
     for index, row in form_df.loc[form_df['author'] == current_user].iterrows():
         print(row)
-
     return
+
 
 def logout():
     pass
+
 
 def login():
     attempts = 0
@@ -83,6 +76,7 @@ def login():
     print("\nExceeded Login Retries")
     sys.exit()
 
+	
 def generate_user():
     name = input('Enter your name: ')
     email = input('Enter your email: ')
@@ -90,75 +84,20 @@ def generate_user():
     user_df.loc[len(user_df)] = [name, email, passwd]
     return
 
-# import openpyxl and tkinter modules
 
-# globally declare wb and sheet variable
-
-# opening the existing excel file
-# wb = load_workbook('C:\\Users\\Admin\\Desktop\\excel.xlsx')
-
-# create the sheet object
-# sheet = wb.active
-
-'''
-def excel():
-	
-    # resize the width of columns in
-    # excel spreadsheet
-    sheet.column_dimensions['A'].width = 30
-    sheet.column_dimensions['B'].width = 10
-    sheet.column_dimensions['C'].width = 10
-    sheet.column_dimensions['D'].width = 20
-    sheet.column_dimensions['E'].width = 20
-    sheet.column_dimensions['F'].width = 40
-    sheet.column_dimensions['G'].width = 50
-
-    # write given data to an excel spreadsheet
-    # at particular location
-    sheet.cell(row=1, column=1).value = "Name"
-    sheet.cell(row=1, column=2).value = "Course"
-    sheet.cell(row=1, column=3).value = "Semester"
-    sheet.cell(row=1, column=4).value = "Form Number"
-    sheet.cell(row=1, column=5).value = "Contact Number"
-    sheet.cell(row=1, column=6).value = "Email id"
-    sheet.cell(row=1, column=7).value = "Address"
-'''
-
-# Function to set focus (cursor)
+# Functions to set focus on text fields
 def focus1(event):
-    # set focus on the course_field box
     first_name_field.focus_set()
-
-
-# Function to set focus
 def focus2(event):
-    # set focus on the sem_field box
     last_name_field.focus_set()
-
-
-# Function to set focus
 def focus3(event):
-    # set focus on the form_no_field box
     address_field.focus_set()
-
-
-# Function to set focus
 def focus4(event):
-    # set focus on the contact_no_field box
     city_field.focus_set()
-
-
-# Function to set focus
 def focus5(event):
-    # set focus on the email_id_field box
     county_field.focus_set()
-
-
-# Function to set focus
 def focus6(event):
-    # set focus on the address_field box
     state_field.focus_set()
-
 def focus7(event):
     zip_code_field.focus_set()
 def focus8(event):
@@ -167,22 +106,6 @@ def focus9(event):
     age_field.focus_set()
 def focus10(event):
     cause_death_field.focus_set()
-
-# Function for clearing the
-# contents of text entry boxes
-def clear():
-	
-    # clear the content of text entry box
-    first_name_field.delete(0, END)
-    last_name_field.delete(0, END)
-    address_field.delete(0, END)
-    city_field.delete(0, END)
-    county_field.delete(0, END)
-    state_field.delete(0, END)
-    zip_code_field.delete(0, END)
-    ssn_field.delete(0, END)
-    age_field.delete(0, END)
-    cause_death_field.delete(0, END)
 
 
 # Function to take data from GUI
@@ -205,43 +128,16 @@ def insert(first_name_field, last_name_field, address_field, city_field,
         print("empty input")
 
     else:
-        '''
-        # assigning the max row and max column
-        # value upto which data is written
-        # in an excel sheet to the variable
-        current_row = sheet.max_row
-        current_column = sheet.max_column
-
-        # get method returns current text
-        # as string which we write into
-        # excel spreadsheet at particular location
-        sheet.cell(row=current_row + 1, column=1).value = name_field.get()
-        sheet.cell(row=current_row + 1, column=2).value = course_field.get()
-        sheet.cell(row=current_row + 1, column=3).value = sem_field.get()
-        sheet.cell(row=current_row + 1, column=4).value = form_no_field.get()
-        sheet.cell(row=current_row + 1, column=5).value = contact_no_field.get()
-        sheet.cell(row=current_row + 1, column=6).value = email_id_field.get()
-        sheet.cell(row=current_row + 1, column=7).value = address_field.get()
-
-        # save the file
-        # wb.save('C:\\Users\\Admin\\Desktop\\excel.xlsx')
-        wb.save('./excel.xlsx')
-        '''
         form_df.loc[len(form_df)] = [current_user, first_name_field.get(), last_name_field.get(),
                                      address_field.get(), city_field.get(),
                            county_field.get(), state_field.get(), zip_code_field.get(),
                                      ssn_field.get(), age_field.get(),
-                           cause_death_field.get()] # [current_user, name_d, place_d, time_d]
+                           cause_death_field.get()]
 
         # set focus on the name_field box
         first_name_field.focus_set()
 
-        # call the clear() function
-        # clear()
 
-
-# Driver code
-# if __name__ == "__main__":
 def gui_form():
 	
     # create a GUI window
@@ -255,8 +151,6 @@ def gui_form():
 
     # set the configuration of GUI window
     root.geometry("500x300")
-
-    # excel()
 
     # create a Form label
     heading = Label(root, text="Form", bg="light blue")
@@ -326,11 +220,7 @@ def gui_form():
     age_field.grid(row=3, column=1, ipadx="100")
     cause_death_field.grid(row=4, column=1, ipadx="100")
 
-    # call excel function
-    # excel()
-
     # create a Submit Button and place into the root window
-    # submit = Button(root, text="Submit", fg="Black", bg="Red", command=insert)
     submit = Button(root, text="Submit", fg="Black", bg="Red", command= lambda:
                     [insert(first_name_field, last_name_field, address_field, city_field,
                            county_field, state_field, zip_code_field, ssn_field, age_field,
@@ -338,9 +228,6 @@ def gui_form():
     submit.grid(row=11, column=1)
     # start the GUI
     root.mainloop()
-
-
-
 
 
 if __name__ == '__main__':
